@@ -1,0 +1,46 @@
+#!/usr/bin/env node
+// @ts-check
+
+const minimist = require('minimist');
+
+const argv = minimist(process.argv.slice(2), {
+  boolean: ['deps-first', 'help'],
+  string: ['ext'],
+});
+
+const { deprank, defaultExtensions } = require('../dist');
+
+if (argv.help || argv._.length === 0) {
+  console.log(`deprank
+Uses PageRank to find the most important files in your codebase.
+
+Usage:
+  deprank ./src
+
+Options:
+
+  --ext         Specifies the file extension(s) to use, defaults to "${defaultExtensions.join(
+    ','
+  )}"
+
+  --deps-first  Sort the files such that those files depended upon by the most important files appear first.
+
+  --help        Shows this help screen.
+`);
+  process.exit();
+}
+
+const extensions = Array.isArray(argv.ext)
+  ? argv.ext
+  : typeof argv.ext === 'string'
+  ? argv.ext.split(/\s*,\s*/)
+  : defaultExtensions;
+
+deprank({
+  paths: argv._,
+  extensions: extensions,
+  depsFirst: argv['deps-first'],
+  cruiseOptions: {
+    includeOnly: argv._,
+  },
+}).then((result) => console.log(result));

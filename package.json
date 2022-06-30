@@ -1,0 +1,66 @@
+{
+  "version": "0.1.0",
+  "license": "MIT",
+  "repository": {
+    "url": "https://github.com/codemix/deprank"
+  },
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src",
+    "bin"
+  ],
+  "bin": {
+    "deprank": "./bin/deprank"
+  },
+  "engines": {
+    "node": ">=10"
+  },
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test": "tsdx test",
+    "lint": "tsdx lint",
+    "prepare": "tsdx build",
+    "size": "size-limit",
+    "analyze": "size-limit --why"
+  },
+  "peerDependencies": {},
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "name": "deprank",
+  "author": "Charles Pick",
+  "module": "dist/deprank.esm.js",
+  "size-limit": [
+    {
+      "path": "dist/deprank.cjs.production.min.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/deprank.esm.js",
+      "limit": "10 KB"
+    }
+  ],
+  "devDependencies": {
+    "@size-limit/preset-small-lib": "^7.0.8",
+    "husky": "^8.0.1",
+    "size-limit": "^7.0.8",
+    "tsdx": "^0.14.1",
+    "tslib": "^2.4.0",
+    "typescript": "^4.7.4"
+  },
+  "dependencies": {
+    "dependency-cruiser": "^11.11.0",
+    "minimist": "^1.2.6"
+  }
+}
