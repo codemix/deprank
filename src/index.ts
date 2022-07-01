@@ -30,13 +30,13 @@ export interface Options {
 }
 
 export const defaultExtensions = allExtensions
-  .filter((a) => a.available)
-  .map((a) => a.extension);
+  .filter(a => a.available)
+  .map(a => a.extension);
 
 export function findModules({ paths, cruiseOptions, extensions }: Options) {
   const result = cruise(paths, cruiseOptions).output as ICruiseResult;
-  return result.modules.filter((module) =>
-    (extensions || defaultExtensions).some((ext) => module.source.endsWith(ext))
+  return result.modules.filter(module =>
+    (extensions || defaultExtensions).some(ext => module.source.endsWith(ext))
   );
 }
 
@@ -63,8 +63,8 @@ async function createCandidate(
     weight: 0,
     outbound: 0,
     dependents: 0,
-    dependencies: module.dependencies.filter((dep) =>
-      (options.extensions || defaultExtensions).some((ext) =>
+    dependencies: module.dependencies.filter(dep =>
+      (options.extensions || defaultExtensions).some(ext =>
         dep.resolved.endsWith(ext)
       )
     ),
@@ -76,12 +76,12 @@ export async function createCandidates(
   options: Options
 ): Promise<Candidate[]> {
   const candidates = await Promise.all(
-    modules.map((module) => createCandidate(module, options))
+    modules.map(module => createCandidate(module, options))
   );
   for (const module of candidates) {
     for (const dep of module.dependencies) {
       const target = candidates.find(
-        (candidate) => candidate.key === dep.resolved
+        candidate => candidate.key === dep.resolved
       );
       if (target !== undefined) {
         target.dependents += 1;
@@ -254,10 +254,16 @@ export function printCandidates(candidates: Candidate[]) {
     '-'
   )}\n${candidates
     .map(
-      (candidate) =>
-        `| ${candidate.key.padEnd(maxFilenameLength, ' ')} | ${candidate.lines
+      candidate =>
+        `| ${candidate.key.padEnd(
+          maxFilenameLength,
+          ' '
+        )} | ${candidate.lines
           .toString()
-          .padEnd(maxLineLength, ' ')} | ${candidate.dependents
+          .padEnd(
+            maxLineLength,
+            ' '
+          )} | ${candidate.dependents
           .toString()
           .padEnd(maxDependentLength, ' ')} | ${candidate.weight.toFixed(
           maxRankLength - 2

@@ -32,12 +32,6 @@
       "pre-commit": "tsdx lint"
     }
   },
-  "prettier": {
-    "printWidth": 80,
-    "semi": true,
-    "singleQuote": true,
-    "trailingComma": "es5"
-  },
   "name": "deprank",
   "author": "Charles Pick",
   "module": "dist/deprank.esm.js",
