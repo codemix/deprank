@@ -41,6 +41,6 @@ deprank({
   extensions: extensions,
   depsFirst: argv['deps-first'],
   cruiseOptions: {
-    includeOnly: argv._,
+    exclude: 'node_modules',
   },
 }).then((result) => console.log(result));
