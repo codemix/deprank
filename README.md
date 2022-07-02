@@ -36,15 +36,13 @@ npx deprank ./fixtures
 | fixtures/index.js      | 4     | 0          | 0.055926 |
 ```
 
-## Build
-
-One way to build this project locally:
+## Building Locally
 
 1. Clone this repository: `git clone git@github.com:codemix/deprank.git`
 2. Get [yarn](https://yarnpkg.com/).
-3. Navigate into the projekt folder: `cd deprank/`.
+3. Navigate into the project folder: `cd deprank/`.
 4. Run `yarn install` && `yarn build`.
-5. Execute, for example using ts-node ([how-to](https://www.geeksforgeeks.org/how-to-execute-typescript-file-using-command-line/)): `ts-node bin/deprank --help`
+5. Run `./bin/deprank --help`
 
 # TypeScript Conversion
 
