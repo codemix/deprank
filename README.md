@@ -36,6 +36,20 @@ npx deprank ./fixtures
 | fixtures/index.js      | 4     | 0          | 0.055926 |
 ```
 
+## Build
+
+One way to build this project locally:
+
+1. Clone this repository: `git clone git@github.com:codemix/deprank.git`
+
+2. Get [yarn](https://yarnpkg.com/).
+
+3. Navigate into the projekt folder: `cd deprank/`.
+
+4. Run `yarn install` && `yarn build`.
+
+5. Execute, for example using ts-node: `ts-node bin/deprank --help`
+
 # TypeScript Conversion
 
 To help convert your codebase to TypeScript whilst minimizing the amount of effort required, we suggest converting files in `deprank --deps-first` order. This option lifts the files that are depended upon by the most important files in the codebase to the top of the list. By tackling each file in order we help ensure that type errors are solved at their origin, rather than their point of use. This can reduce the number of type errors much more quickly than the more typical, ad-hoc order that such conversions usually take, and it helps TypeScript use inference which reduces the amount of manual typing required. It's not uncommon to see hundreds or thousands of type errors disappear just by fixing a few key files.
